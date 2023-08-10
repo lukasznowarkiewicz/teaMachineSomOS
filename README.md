@@ -1,80 +1,74 @@
-# teaMachineSomOS
+# 🍵 teaMachineSomOS
 
-Supported hardware:
-- raspberry pi zero W
-- raspberry pi zero 2 W
+## Supported Hardware:
+- **Raspberry Pi Zero W**
+- **Raspberry Pi Zero 2 W**
 
-# Installation:
-SD card flashed from Raspberry pi imager software
+## Installation:
 
-Image:
-url:https://downloads.raspberrypi.org/raspios_armhf/images/raspios_armhf-2023-05-03/
-Raspberry Pi OS with desktop
-Release date: May 3rd 2023
-System: 32-bit
-Kernel version: 6.1
-Debian version: 11 (bullseye)
-Size: 872MB
+**Source:** [Raspberry Pi OS with desktop](https://downloads.raspberrypi.org/raspios_armhf/images/raspios_armhf-2023-05-03/)
+- **Release Date:** May 3rd, 2023
+- **System:** 32-bit
+- **Kernel Version:** 6.1
+- **Debian Version:** 11 (bullseye)
+- **Size:** 872MB
 
-# Configuring required packages
+Ensure the SD card is flashed using the **Raspberry Pi Imager software**.
 
-# Configure swap space to 500MB
+## Configuration:
+
+### Configure Swap Space (500MB):
+
+```bash
 sudo swapoff -a
-
 sudo dd if=/dev/zero of=/var/swapfile bs=1M count=500
-
 sudo chmod 600 /var/swapfile
-
 sudo mkswap /var/swapfile
-
 sudo swapon /var/swapfile
-
 echo "/var/swapfile swap swap defaults 0 0" | sudo tee -a /etc/fstab
+```
 
-# Update the system
+### System Updates:
 
+```bash
 sudo apt update -y
-
 sudo apt upgrade -y
+```
 
-# Install various packages
+### Installing System Packages:
 
+```bash
 sudo apt-get install -y matchbox-keyboard
-
 sudo apt install -y python3 python3-pip
-
 sudo apt-get install -y python3-pil.imagetk python3-tk libatlas-base-dev
+```
 
-# Install Python packages
+### Installing Python Libraries:
 
+```bash
 pip3 install --no-input customtkinter Pillow
-
 pip3 install --no-input serial plotly dash collections-extended numpy scikit-fuzzy matplotlib pyusb
-
-pip3 install opencv-python==4.6.0.66 
-
+pip3 install opencv-python==4.6.0.66
 pip3 install --upgrade numpy
+```
 
-# Append lines to /boot/config.txt
+### Update /boot/config.txt:
+
+```bash
 echo "max_usb_current=1" | sudo tee -a /boot/config.txt
-
 echo "hdmi_group=2" | sudo tee -a /boot/config.txt
-
 echo "hdmi_mode=87" | sudo tee -a /boot/config.txt
-
 echo "hdmi_cvt 1024 600 60 6 0 0 0" | sudo tee -a /boot/config.txt
-
 echo "hdmi_drive=1" | sudo tee -a /boot/config.txt
+```
 
+### Set vm.swappiness:
 
-# Set vm.swappiness to 0
-
+```bash
 echo "vm.swappiness=0" | sudo tee -a /etc/sysctl.conf
-
 sudo sysctl -p
+```
 
-
-Certainly! Here's a concise version:
 
 # Enable Camera on Raspberry Pi Zero
 
