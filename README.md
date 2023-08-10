@@ -72,3 +72,36 @@ echo "hdmi_drive=1" | sudo tee -a /boot/config.txt
 echo "vm.swappiness=0" | sudo tee -a /etc/sysctl.conf
 
 sudo sysctl -p
+
+
+Certainly! Here's a concise version:
+
+# Enable Camera on Raspberry Pi Zero
+
+### Setup:
+1. **Power Off** Pi Zero.
+2. **Connect** camera: ensure blue side of ribbon faces USB ports.
+3. **Boot** Pi Zero.
+
+### Configuration:
+1. Open terminal.
+2. Update with:
+   ```bash
+   sudo apt update && sudo apt upgrade -y
+   ```
+3. Run:
+   ```bash
+   sudo raspi-config
+   ```
+4. Go to `Interfacing Options` > `Camera` > Select `<Yes>`.
+
+5. **Reboot**:
+   ```bash
+   sudo reboot
+   ```
+
+### Test:
+1. Capture image:
+   ```bash
+   raspistill -o test.jpg
+   ```
