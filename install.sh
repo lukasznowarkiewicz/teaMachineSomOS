@@ -19,7 +19,7 @@ sudo apt-get install -y python3-pil.imagetk python3-tk libatlas-base-dev
 
 # Install Python packages
 pip3 install --no-input customtkinter Pillow
-pip3 install --no-input serial plotly dash collections-extended numpy scikit-fuzzy matplotlib pyusb
+pip3 install --no-input serial plotly dash collections-extended numpy scikit-fuzzy pyusb
 pip3 install opencv-python==4.6.0.66 
 pip3 install --upgrade numpy
 
