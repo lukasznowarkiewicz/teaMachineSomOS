@@ -14,15 +14,6 @@ execute_and_check() {
     fi
 }
 
-# Configure swap space to 500MB
-echo "Configuring swap size to 500MB..."
-sudo swapoff -a
-sudo dd if=/dev/zero of=/var/swapfile bs=1M count=500
-sudo chmod 600 /var/swapfile
-sudo mkswap /var/swapfile
-sudo swapon /var/swapfile
-echo "/var/swapfile swap swap defaults 0 0" | sudo tee -a /etc/fstab
-
 # Update the system
 execute_and_check sudo apt update -y
 execute_and_check sudo apt upgrade -y
@@ -34,7 +25,7 @@ execute_and_check sudo apt-get install -y python3-pil.imagetk python3-tk libatla
 
 # Install Python packages
 execute_and_check pip3 install --no-input customtkinter Pillow
-execute_and_check pip3 install --no-input serial plotly dash collections-extended numpy scikit-fuzzy matplotlib pyusb
+execute_and_check pip3 install --no-input serial plotly dash collections-extended numpy scikit-fuzzy pyusb
 execute_and_check pip3 install opencv-python==4.6.0.66 
 execute_and_check pip3 install --upgrade numpy
 
@@ -44,11 +35,6 @@ echo "hdmi_group=2" | sudo tee -a /boot/config.txt
 echo "hdmi_mode=87" | sudo tee -a /boot/config.txt
 echo "hdmi_cvt 1024 600 60 6 0 0 0" | sudo tee -a /boot/config.txt
 echo "hdmi_drive=1" | sudo tee -a /boot/config.txt
-
-# Set vm.swappiness to 0
-echo "Setting vm.swappiness to 0..."
-echo "vm.swappiness=0" | sudo tee -a /etc/sysctl.conf
-sudo sysctl -p
 
 # Display the summary
 echo -e "\n===== INSTALLATION SUMMARY ====="
@@ -65,3 +51,4 @@ if [ ${#failed_installs[@]} -ne 0 ]; then
         echo "- $item"
     done
 fi
+
